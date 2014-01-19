@@ -1,6 +1,7 @@
 <?php
 function my_messages_action()
 {	
+	// the check open of the session
 	if ( empty($_SESSION['sess']) )
 	{
 		header ("Location: ".BASE_URL."/index.php/login");
