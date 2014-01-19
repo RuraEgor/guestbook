@@ -9,12 +9,15 @@ function my_messages_action()
 	{
 		if ( count($_POST) > 0 )
 		{
+			// destruction of session
 			if( isset($_POST['destroy']) ) 
 			{	
 				header ("Location: ".BASE_URL."/index.php/login");
 				unset($_SESSION['sess']);
 				session_destroy();
 			}
+			
+			// user delete messages
 			elseif ( isset($_POST['delete_messages'] ) && !empty( $_POST['delete']) )
 			{
 				if ( delete_messages($_POST) )
@@ -32,6 +35,8 @@ function my_messages_action()
 					exit;
 				}
 			}
+			
+			// user delete message
 			elseif ( !isset($_POST['delete_messages'] ) && !empty( $_POST['delete']) )
 			{
 				if ( delete_message($_POST) )
@@ -51,10 +56,9 @@ function my_messages_action()
 			}
 		}
 		
+		// print all messages one user
 		$messages = print_my_messages() ;
 		require 'views/my_messages.php';
-		
-		//echo "<script>confirm('Are you sure you want to delete these messages?');</script>";
 
 	}
 }
